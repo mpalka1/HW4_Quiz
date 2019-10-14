@@ -6,9 +6,25 @@ var questionBtn = document.getElementById('questionBtn');
 var startQuestion = 0;
 var crtQtn = 1;
 var score = 0;
-
+var userGuess = "alerts";
 /* helpers */
 /* takes in index, uses that index to find question in db to return the title */
+function init() {
+  // hide start button
+  start.style.display = "none";
+}
+// Check Answers
+function checkAnswer() {
+  if (userGuess === questions[crtQtn].answers) {
+    score++;
+    console.log(score);
+    console.log(questions[crtQtn].answers);
+  // } else if (userGuess !== questions[crtQtn].answers) {
+    // decrease 10 seconds of time
+    // secondsLeft -= 10;
+  };
+};
+// Timer
 function countdown(minutes) {
   var seconds = 60;
   var mins = minutes
@@ -32,6 +48,7 @@ function countdown(minutes) {
   }
   tick();
 }
+/* takes in index, uses this index to return the questions from the db */
 function renderQuestion(index) {
   //show question
   return questions[index].title;
@@ -46,16 +63,13 @@ function renderChoices(index) {
     };
 }
 // begins quiz and hides initial screen
-function init() {
-  // hide start button
-  start.style.display = "none";
-}
+
+
 /* events */
 // Start Button Action
 strtBtn.addEventListener('click', function(){
   init();
   countdown(1); 
-  startQuestion++;
   quiz.style.display = "block"; 
     /* call redner question */
     questionDiv.innerHTML = renderQuestion(startQuestion);
@@ -63,14 +77,14 @@ strtBtn.addEventListener('click', function(){
 });
 // Next Button Action
 choicesDiv.addEventListener('click', function() {
+  // if()
+  checkAnswer();
   if(crtQtn<questions.length){
     questionDiv.innerHTML = renderQuestion(crtQtn);
     renderChoices(crtQtn);
     crtQtn+=1;
-    console.log(crtQtn);
   }else if(crtQtn===questions.length){
     questionDiv.innerHTML = "The Quiz is Over";
-
   }
 });
 // Answer Button Check

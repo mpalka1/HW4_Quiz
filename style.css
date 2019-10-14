@@ -1,6 +1,6 @@
 header, div, section, nav, footer{
-    border: 1px solid red;
-    border: 1px solid red; 
+    /* border: 1px solid red; */
+    /* border: 1px solid red;  */
 }
 nav{
     color: #ffff;
